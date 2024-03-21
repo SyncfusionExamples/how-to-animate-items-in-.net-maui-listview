@@ -1,0 +1,82 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:ListViewMaui"
+             xmlns:listView="clr-namespace:Syncfusion.Maui.ListView;assembly=Syncfusion.Maui.ListView"
+             x:Class="ListViewMaui.MainPage">
+
+    <ContentPage.BindingContext>
+        <local:ContactsViewModel />
+    </ContentPage.BindingContext>
+    <ContentPage.Behaviors>
+        <local:Behaviours/>
+    </ContentPage.Behaviors>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <SearchBar x:Name="filterText"
+       Placeholder="Search here to filter" HeightRequest="50"
+       Grid.Row="0">
+        </SearchBar>
+
+        <listView:SfListView x:Name="listView" Grid.Row="1" ItemSize="60" AllowGroupExpandCollapse="True"
+                     ItemsSource="{Binding CustomerDetails}">
+            <!--<listView:SfListView.DataSource>
+            <data:DataSource>
+                <data:DataSource.GroupDescriptors>
+                    <data:GroupDescriptor PropertyName="ContactType" />
+                </data:DataSource.GroupDescriptors>
+            </data:DataSource>
+        </listView:SfListView.DataSource>-->
+            <listView:SfListView.ItemTemplate>
+                <DataTemplate>
+                    <Grid x:Name="grid">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="1" />
+                                </Grid.RowDefinitions>
+
+                                <Grid Grid.Column="0"
+                  RowSpacing="1"
+                  Padding="0,5,0,0"
+                  VerticalOptions="Start">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="*" />
+                                        <RowDefinition Height="*" />
+                                    </Grid.RowDefinitions>
+
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="Auto" />
+                                    </Grid.ColumnDefinitions>
+
+                                    <Label LineBreakMode="NoWrap" Grid.Row="0" Grid.Column="0"
+                     Text="{Binding ContactName}"
+					             FontAttributes="Bold" FontSize="18" VerticalOptions="Start"
+                     TextColor="Teal">
+                                      
+                                    </Label>
+                                    <Label Grid.Row="1"
+                     Grid.Column="0" FontSize="12" 
+                     LineBreakMode="NoWrap"
+                     Text="{Binding ContactNumber}"
+                     TextColor="Teal">
+                                       
+                                    </Label>
+                                    <Label LineBreakMode="NoWrap" 
+                Text="{Binding ContactType}" VerticalOptions="End"
+                TextColor="Teal" Grid.Row="0" Grid.Column="1" Padding="0,0,10,0"  VerticalTextAlignment="End" FontSize="10" Margin="5" >
+                                        
+                                    </Label>
+                                </Grid>
+                                <StackLayout Grid.Row="1" BackgroundColor="Gray" HeightRequest="1"/>
+                            </Grid>
+              
+                </DataTemplate>
+            </listView:SfListView.ItemTemplate>
+        </listView:SfListView>
+    </Grid>
+</ContentPage>
